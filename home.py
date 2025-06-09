@@ -21,7 +21,7 @@ st.markdown("Discover internships tailored to your resume")
 st.markdown("---")
 st.markdown("Ready to explore internships?")
 if st.button("Internship Finder"):
-    st.switch_page("pages/Internships")
+    st.switch_page("Internships")
 
 
 
