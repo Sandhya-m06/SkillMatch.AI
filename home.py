@@ -21,4 +21,4 @@ st.markdown("### 👋 Discover internships tailored to your resume. Start by nav
 st.markdown("---")
 st.markdown("#### 🔍 Ready to explore internships?")
 if st.button("Go to Internship Finder"):
-    st.switch_page("pages/Internships.py")
+    st.switch_page("pages/internships.py")
