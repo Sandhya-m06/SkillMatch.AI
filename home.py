@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_lottie import st_lottie
 import json
+import streamlit as st
+st.write(st.session_state)
 
 st.set_page_config(page_title="SkillMatch.AI", page_icon="🚀", layout="centered")
 
