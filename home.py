@@ -14,13 +14,13 @@ animation = load_lottiefile("assets/animation.json")
 st_lottie(animation, speed=1, loop=True, quality="high", height=300)
 
 # Welcome Header
-st.markdown("<h1 style='text-align: center;'>Welcome to SkillMatch.AI 🚀</h1>", unsafe_allow_html=True)
-st.markdown("### 👋 Discover internships tailored to your resume. Start by navigating to **Internship Finder** from the sidebar.")
+st.markdown("<h1 style='text-align: center;'>Welcome to SkillMatch.AI </h1>", unsafe_allow_html=True)
+st.markdown("Discover internships tailored to your resume")
 
 # Navigation Button to Internships Page
 st.markdown("---")
-st.markdown("#### 🔍 Ready to explore internships?")
-if st.button("Go to Internship Finder"):
-    st.switch_page("internships")
+st.markdown("Ready to explore internships?")
+if st.button("Internship Finder"):
+    st.switch_page("Internships")
 
 
