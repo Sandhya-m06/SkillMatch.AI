@@ -22,3 +22,4 @@ st.markdown("---")
 st.markdown("#### 🔍 Ready to explore internships?")
 if st.button("Go to Internship Finder"):
     st.switch_page("pages/internships.py")
+
