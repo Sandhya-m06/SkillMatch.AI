@@ -1,115 +1,87 @@
 def map_skills_to_category(skills):
+    import re
+
     category_map = {
-        # Data Science / Analytics
-        "python": "Data Science",
-        "machine learning": "Data Science",
-        "deep learning": "Data Science",
-        "pandas": "Data Science",
-        "numpy": "Data Science",
-        "tensorflow": "Data Science",
-        "pytorch": "Data Science",
-        "sql": "Data Science",
-        "excel": "Data Science",
-        "data analysis": "Data Science",
-        "power bi": "Data Science",
-        "statistics": "Data Science",
-        "r": "Data Science",
-
-        # Web Development
-        "html": "Web Development",
-        "css": "Web Development",
-        "javascript": "Web Development",
-        "react": "Web Development",
-        "node.js": "Web Development",
-        "flask": "Web Development",
-        "django": "Web Development",
-        "angular": "Web Development",
-        "vue": "Web Development",
-
-        # Software Development / Programming Languages
-        "java": "Software Development",
-        "c++": "Software Development",
-        "c": "Software Development",
-        "c#": "Software Development",
-        "ruby": "Software Development",
-        "swift": "Software Development",
-        "kotlin": "Software Development",
-        "php": "Software Development",
-
-        # Cloud Computing / DevOps / IT
-        "aws": "Cloud Computing",
-        "azure": "Cloud Computing",
-        "google cloud": "Cloud Computing",
-        "linux": "Cloud Computing",
-        "docker": "Cloud Computing",
-        "kubernetes": "Cloud Computing",
-        "devops": "Cloud Computing",
-        "networking": "Cloud Computing",
-
-        # Electrical / Electronics / Automation
-        "electrical engineering": "Electrical Engineering",
-        "circuit design": "Electrical Engineering",
-        "embedded systems": "Electrical Engineering",
-        "microcontroller": "Electrical Engineering",
-        "pcb design": "Electrical Engineering",
-        "automation": "Automation",
-        "robotics": "Automation",
-        "control systems": "Automation",
-        "sensors": "Automation",
-        "plc": "Automation",
-
-        # Design / Creative
-        "figma": "UI/UX Design",
-        "adobe xd": "UI/UX Design",
-        "photoshop": "Graphic Design",
-        "illustrator": "Graphic Design",
-        "ui/ux": "UI/UX Design",
-        "user experience": "UI/UX Design",
-        "user interface": "UI/UX Design",
-        "graphic design": "Graphic Design",
-
-        # Marketing / Content
-        "seo": "Marketing",
-        "digital marketing": "Marketing",
-        "social media": "Marketing",
-        "content writing": "Content Writing",
-        "copywriting": "Content Writing",
-        "blogging": "Content Writing",
-        "advertising": "Marketing",
-
-        # Finance / Accounting
-        "accounting": "Finance",
-        "finance": "Finance",
-        "investment": "Finance",
-        "banking": "Finance",
-        "budgeting": "Finance",
-        "excel": "Finance",
-
-        # Human Resources / Soft Skills
-        "recruitment": "Human Resources",
-        "hr": "Human Resources",
-        "human resources": "Human Resources",
-        "payroll": "Human Resources",
-        "communication": "Soft Skills",
-        "teamwork": "Soft Skills",
-        "leadership": "Soft Skills",
-        "time management": "Soft Skills",
-        "problem solving": "Soft Skills",
-        "adaptability": "Soft Skills",
-        "critical thinking": "Soft Skills",
-
-        # Other technical skills
-        "sql": "Database Management",
-        "mongodb": "Database Management",
-        "data warehousing": "Database Management",
-        "etl": "Database Management",
+        "Data Science": [
+            "python", "machine learning", "ml", "deep learning", "pandas", "numpy",
+            "scikit-learn", "matplotlib", "seaborn", "tensorflow", "pytorch",
+            "sql", "data analysis", "r", "statistics", "power bi", "excel", "tableau"
+        ],
+        "Web Development": [
+            "html", "css", "javascript", "js", "react", "angular", "vue", "node.js",
+            "express.js", "flask", "django", "bootstrap"
+        ],
+        "Software Development": [
+            "java", "c++", "c", "c#", "kotlin", "swift", "ruby", "go", "php", "typescript"
+        ],
+        "Cloud Computing": [
+            "aws", "azure", "google cloud", "gcp", "cloud", "docker", "kubernetes",
+            "linux", "jenkins", "devops", "terraform", "ansible"
+        ],
+        "Electrical Engineering": [
+            "electrical engineering", "circuit design", "pcb design", "microcontroller",
+            "arduino", "raspberry pi", "vhdl", "verilog", "embedded systems"
+        ],
+        "Automation": [
+            "plc", "sensors", "control systems", "robotics", "automation", "industrial iot"
+        ],
+        "UI/UX Design": [
+            "ui", "ux", "user experience", "user interface", "figma", "adobe xd", "wireframing",
+            "prototyping", "design thinking"
+        ],
+        "Graphic Design": [
+            "photoshop", "illustrator", "graphic design", "canva", "creativity", "branding"
+        ],
+        "Marketing": [
+            "seo", "digital marketing", "email marketing", "social media", "facebook ads",
+            "instagram marketing", "adwords", "analytics", "google ads", "advertising"
+        ],
+        "Content Writing": [
+            "content writing", "copywriting", "blogging", "article writing", "proofreading"
+        ],
+        "Finance": [
+            "accounting", "finance", "investment", "banking", "budgeting", "valuation"
+        ],
+        "Human Resources": [
+            "recruitment", "hr", "human resources", "talent acquisition", "payroll", "interviewing"
+        ],
+        "Soft Skills": [
+            "communication", "teamwork", "leadership", "time management", "problem solving",
+            "adaptability", "critical thinking", "empathy", "creativity"
+        ],
+        "Database Management": [
+            "sql", "mysql", "mongodb", "oracle", "nosql", "database", "data warehousing", "etl"
+        ],
+        "Cybersecurity": [
+            "cybersecurity", "network security", "ethical hacking", "kali linux", "burpsuite",
+            "firewalls", "pen testing", "information security"
+        ],
+        "Mobile App Development": [
+            "android", "ios", "flutter", "react native", "kotlin", "swift", "mobile apps"
+        ],
+        "Game Development": [
+            "unity", "unreal engine", "game development", "cocos", "game design"
+        ],
+        "Business Analytics": [
+            "business analysis", "market research", "excel", "data visualization", "kpi"
+        ],
+        "Mechanical Engineering": [
+            "solidworks", "autocad", "mechanical design", "catia", "ansys", "thermal engineering"
+        ]
     }
 
-    matched = set()
-    for skill in skills:
-        skill_lower = skill.lower()
-        if skill_lower in category_map:
-            matched.add(category_map[skill_lower])
+    matched_categories = set()
+    skill_aliases = {s.lower(): cat for cat, keywords in category_map.items() for s in keywords}
 
-    # If no categories matched, default to General
-    return list(matched) if matched else ["General"]
+    for skill in skills:
+        skill_lower = skill.lower().strip()
+        # Try exact match first
+        if skill_lower in skill_aliases:
+            matched_categories.add(skill_aliases[skill_lower])
+        else:
+            # Try partial fuzzy match
+            for keyword, cat in skill_aliases.items():
+                if re.search(rf"\b{re.escape(keyword)}\b", skill_lower):
+                    matched_categories.add(cat)
+
+    return list(matched_categories) if matched_categories else ["General"]
