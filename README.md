@@ -16,3 +16,9 @@ SkilMatch.AI is an AI-powered web application designed to help students and earl
 **Backend:** Python
 **Libraries Used:** NLTK, Scikit-learn, Pandas, BeautifulSoup, Regex
 **Web Scraping / Mapping:** Category mapping with Internshala’s URL structure
+
+# 🌟 SkillMatch.AI – Your AI-Powered Internship Matchmaker 🚀
+
+🔗 [Live App ➜ SkillMatch.AI](https://skillmatchai-ejrr2ddxy7hzfxe9d5fkfh.streamlit.app/)
+
+
